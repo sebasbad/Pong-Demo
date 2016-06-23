@@ -11,7 +11,12 @@
 @implementation GameScene
 
 -(void)didMoveToView:(SKView *)view {
-
+    self.backgroundColor = [SKColor blackColor];
+    self.scaleMode = SKSceneScaleModeAspectFit;
+    self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
+    
+    SKNode *ball = [self childNodeWithName:@"ball"];
+    ball.physicsBody.angularVelocity = 1.0;
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
