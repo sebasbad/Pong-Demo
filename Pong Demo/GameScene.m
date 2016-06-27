@@ -8,6 +8,13 @@
 
 #import "GameScene.h"
 
+@interface GameScene ()
+
+@property (strong, nonatomic) UITouch *leftPaddleMotivatingTouch;
+@property (strong, nonatomic) UITouch *rightPaddleMotivatingTouch;
+
+@end
+
 @implementation GameScene
 
 -(void)didMoveToView:(SKView *)view {
