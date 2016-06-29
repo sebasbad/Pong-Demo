@@ -77,7 +77,7 @@ static const CGFloat kTrackPixelsPerSecond = 1000;
 }
 
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    
+    [self trackPaddlesToMotivatingTouches];
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
