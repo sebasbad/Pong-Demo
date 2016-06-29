@@ -17,6 +17,8 @@
 
 @implementation GameScene
 
+static const CGFloat kTrackPixelsPerSecond = 1000;
+
 -(void)didMoveToView:(SKView *)view {
     self.backgroundColor = [SKColor blackColor];
     self.scaleMode = SKSceneScaleModeAspectFit;
@@ -45,7 +47,32 @@
             ball.physicsBody.velocity = CGVectorMake(ball.physicsBody.velocity.dx * 2.0, ball.physicsBody.velocity.dy);
         }
     }
+    
+    [self trackPaddlesToMotivatingTouches];
+}
 
+- (void)trackPaddlesToMotivatingTouches {
+    
+    id nodeAndTouchArray = @[@{@"node": [self childNodeWithName:@"left_paddle"],
+                               @"touch": self.leftPaddleMotivatingTouch ?: [NSNull null]
+                               },
+                             @{@"node": [self childNodeWithName:@"right_paddle"],
+                               @"touch": self.rightPaddleMotivatingTouch ?: [NSNull null]
+                               }];
+    
+    for (NSDictionary *nodeAndTouch in nodeAndTouchArray) {
+        SKNode *node = nodeAndTouch[@"node"];
+        UITouch *touch = nodeAndTouch[@"touch"];
+        
+        if ([[NSNull null] isEqual:touch]) {
+            continue;
+        }
+        
+        CGFloat yPos = [touch locationInNode:self].y;
+        NSTimeInterval duration = ABS(yPos - node.position.y) / kTrackPixelsPerSecond;
+        
+        SKAction *moveAction = [SKAction moveToY:yPos duration:duration];
+        [node runAction:moveAction withKey:@"moving!"];
     }
 }
 
