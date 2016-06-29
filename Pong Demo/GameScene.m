@@ -17,7 +17,7 @@
 
 @implementation GameScene
 
-static const CGFloat kTrackPixelsPerSecond = 1000;
+static const CGFloat kTrackPixelsPerSecond = 500;
 
 -(void)didMoveToView:(SKView *)view {
     self.backgroundColor = [SKColor blackColor];
