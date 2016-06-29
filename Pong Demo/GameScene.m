@@ -31,6 +31,20 @@
     
     for (UITouch *touch in touches) {
         CGPoint location = [touch locationInNode:self];
+        
+        NSLog(@"\n%f %f %f %f", location.x, location.y, self.frame.size.width, self.frame.size.height);
+        
+        if (location.x < self.frame.size.width * 0.3) {
+            self.leftPaddleMotivatingTouch = touch;
+            NSLog(@"left");
+        } else if (location.x > self.frame.size.width * 0.7) {
+            self.rightPaddleMotivatingTouch = touch;
+            NSLog(@"right");
+        } else {
+            SKNode *ball = [self childNodeWithName:@"ball"];
+            ball.physicsBody.velocity = CGVectorMake(ball.physicsBody.velocity.dx * 2.0, ball.physicsBody.velocity.dy);
+        }
+    }
 
     }
 }
