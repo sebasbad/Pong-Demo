@@ -83,10 +83,24 @@ static const CGFloat kTrackPixelsPerSecond = 1000;
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     
+    if ([touches containsObject:self.leftPaddleMotivatingTouch]) {
+        self.leftPaddleMotivatingTouch = nil;
+    }
+    
+    if ([touches containsObject:self.rightPaddleMotivatingTouch]) {
+        self.rightPaddleMotivatingTouch = nil;
+    }
 }
 
 - (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     
+    if ([touches containsObject:self.leftPaddleMotivatingTouch]) {
+        self.leftPaddleMotivatingTouch = nil;
+    }
+    
+    if ([touches containsObject:self.rightPaddleMotivatingTouch]) {
+        self.rightPaddleMotivatingTouch = nil;
+    }
 }
 
 -(void)update:(CFTimeInterval)currentTime {
